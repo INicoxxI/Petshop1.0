@@ -1,0 +1,103 @@
+{% extends 'core/layout.html' %}
+
+{% block content %}
+
+
+
+
+<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+        {% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    <p>{{message}}</p> 
+                {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div> 
+        {% endif %}       
+
+          <div class="card mb-3">
+
+            <div class="card-body">
+
+              <div class="pt-4 pb-2">
+                <h5 class="card-title text-center pb-0 fs-4">Crea tu Cuenta</h5>
+                <p class="text-center small">Ingresa la informacion requerida a continuacion</p>
+              </div>
+              <form action="" method="POST" class="row g-3 needs-validation" novalidate>  
+                {% csrf_token %}
+
+                <div class="col-12">
+                  <label for="yourUsername" class="form-label">Usuario</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" id="usuario" class="form-control" name="username" aria-describedby="usernameHelp" required>
+                    <small id="usernameHelp">150 carácteres como máximo. Únicamente letras, dígitos y @/./+/-/_</small>
+                    <div class="invalid-feedback">Porfavor escoge un nombre de usuario.</div>
+                  </div>
+                </div>
+                
+
+                <div class="col-12">
+                  <label for="yourEmail" class="form-label">Email</label>
+                  <input type="text" id="email" class="form-control" name="email" aria-describedat="emailHelp">
+                  <small id="emailHelp">Debe contener un @ y .com</small>
+                  <div class="invalid-feedback">porfavor ingresa correo valido!</div>
+                </div>
+
+                
+
+                <div class="col-12">
+                  <label for="yourPassword" class="form-label">Contraseña</label>
+                  <input type="password" id="password" class="form-control" name="password1" aria-describedby="password1Help" required>
+                <small id="password1Help">
+                    No debe asemejarse a su otra información personal. <br>
+                    Debe contener al menos 8 caracteres. <br>
+                    No puede ser una clave utilizada comúnmente. <br>
+                    No puede ser completamente numérica.
+                </small>
+                  <div class="invalid-feedback">Porfavor ingresa una clave!</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="yourPassword" class="form-label">Repetir Contraseña</label>
+                  <input type="password" class="form-control" id="passwordRepeat" name="password2" aria-describedby="password2Help">
+                  <small id="password2Help">Repita lo anterior</small>
+                </small>
+                  <div class="invalid-feedback">No son Iguales!</div>
+                </div>
+
+
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                    <label class="form-check-label" for="acceptTerms">Yo acepto los <a href="#">Terminos y Condiciones</a></label>
+                    <div class="invalid-feedback">Debes estar de acuerdo para continuar.</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+
+                </div>
+                <div class="col-12">
+                  <p class="small mb-0">Ya tienes una Cuenta? <a href="{% url 'login'%}?next={{request.path}}">Iniciar Sesion</a></p>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+        
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+{% endblock %}
